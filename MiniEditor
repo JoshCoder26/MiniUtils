@@ -1,0 +1,64 @@
+#!/bin/bash
+FILE="$1"
+function MainLoop() {
+    file="$1"
+    while true; do
+        sleep 5
+        less "$file"
+        echo "Choose one of the following actions and type the corresponding number"
+        echo "1: Add line 2: Remove line 3: Edit line 4. Rename 5. Exit"
+        read -p "1: Add line 2: Remove line 3: Edit line 4. Rename 5. Exit" SELECTION
+        if [ "$SELECTION" = "1" ] ; then
+            echo "Enter line number:"
+            read -p "Enter line number:" LINENUM
+            echo "Enter line contents:"
+            read LINETEXT
+            echo $(head -n "$LINENUM" "$file") "$LINETEXT" $(tail -n $(($(wc -l < "$file")-$(("$LINENUM"+1)))) "$file") > "$file"
+        elif [ "$SELECTION" = "2" ] ; then
+            echo "Enter line number:"
+            read LINENUM
+            echo $(head -n $(("$LINENUM"-1)) "$file") $(tail -n $(($(wc -l < "$file")-"$LINENUM")) "$file") > "$file"
+        elif [ "$SELECTION" = "3" ] ; then
+            echo "Enter line number:"
+            read LINENUM
+            echo "Enter line contents:"
+            read LINETEXT
+            echo $(head -n $(("$LINENUM"-1)) "$file") "$LINETEXT" $(tail -n $(($(wc -l < "$file")-"$LINENUM")) "$file") > "$file"
+        elif [ "$SELECTION" = "4" ] ; then
+            echo "Enter file name"
+            read FILENAME
+            mv "$file" "$FILENAME"
+            file=$FILENAME
+        elif [ "$SELECTION" = "5" ] ; then
+            echo "Exiting"
+            exit 0
+        else
+            echo "Invalid input"
+        fi
+    clear
+    done
+}
+
+error() {
+    CODE="$1"
+    MSG="$2"
+    echo "Error $CODE: $MSG" >&2
+}
+if [ -n "$FILE" ]; then
+    if [ -f "$FILE" ]; then
+        if [ -w "$FILE" ]; then
+            MainLoop "$FILE"
+            exit 0
+        else
+            error 001 "Do not have the required permissions to load"
+        fi
+    else
+        echo "Creating file"
+        touch "$FILE"
+        MainLoop "$FILE"
+        exit 0
+    fi
+else
+    error 002 "No file specified"
+fi
+exit 1

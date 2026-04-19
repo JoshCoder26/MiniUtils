@@ -1,0 +1,78 @@
+#!/bin/bash
+CMD="${1,,}"
+if [[ ! -d "$HOME/.MiniPass" || "$CMD" == "full_reset" ]]; then
+rm -rf "$HOME/.MiniPass"
+echo "Welcome! This computer doesn't contain any MiniPass password files, so lets get started!"
+read -sp "Enter a password: " PW
+echo
+echo "Creating file..."
+mkdir "$HOME/.MiniPass"
+echo "Done!"
+echo "$PW" > "$HOME/.MiniPass/.MiniPass.txt"
+gpg --batch --quiet --no-tty --passphrase "$PW" --pinentry-mode loopback -c "$HOME/.MiniPass/.MiniPass.txt"
+rm "$HOME/.MiniPass/.MiniPass.txt"
+chmod 600 "$HOME/.MiniPass/.MiniPass.txt.gpg"
+fi
+if [[ "$CMD" == "password_reset" ]]; then
+read -sp "Enter master password: " PW
+echo
+if gpg --batch --quiet --no-tty --passphrase "$PW" --pinentry-mode loopback -d "$HOME/.MiniPass/.MiniPass.txt.gpg" > /dev/null 2>&1; then
+gpg --batch --quiet --no-tty --passphrase "$PW" --pinentry-mode loopback -d "$HOME/.MiniPass/.MiniPass.txt.gpg" > "$HOME/.MiniPass/.MiniPass.txt"
+read -sp "Enter new password: " PW
+echo
+gpg --batch --quiet --no-tty --yes --passphrase "$PW" --pinentry-mode loopback -c "$HOME/.MiniPass/.MiniPass.txt"
+rm "$HOME/.MiniPass/.MiniPass.txt"
+else
+echo
+echo "Password is incorrect"
+fi
+fi
+if [[ "$CMD" == "add" || "$CMD" == "edit" ]]; then
+if [[ ! -z "$2" ]]; then
+NN="$2"
+else
+read -p "Enter item name: " NN
+fi
+read -p "Enter new item username: " NU
+read -sp "Enter new item password: " NP
+echo
+read -sp "Enter master password: " PW
+echo
+if gpg --batch --quiet --no-tty --passphrase "$PW" --pinentry-mode loopback -d "$HOME/.MiniPass/.MiniPass.txt.gpg" > /dev/null 2>&1; then
+echo -e "$NU\n$NP" > "$HOME/.MiniPass/.$NN.txt"
+gpg --batch --quiet --no-tty --yes --passphrase "$PW" --pinentry-mode loopback -c "$HOME/.MiniPass/.$NN.txt"
+rm "$HOME/.MiniPass/.$NN.txt"
+else
+echo "Password is incorrect"
+fi
+fi
+if [[ "$CMD" == "get" ]]; then
+if [[ -z "$2" ]]; then
+read -p "Enter name of entry you want to fetch: " IN
+else
+IN="$2"
+fi
+read -sp "Enter master password: " PW
+echo
+if gpg --batch --quiet --no-tty --passphrase "$PW" --pinentry-mode loopback -d "$HOME/.MiniPass/.$IN.txt.gpg" > /dev/null 2>&1; then
+{
+  read -r IU
+  read -r IP
+} < <(gpg --batch --quiet --no-tty --passphrase "$PW" --pinentry-mode loopback -d "$HOME/.MiniPass/.$IN.txt.gpg")
+echo "Username: $IU"
+echo "Password: $IP"
+else
+echo "Either the item name or the password is incorrect."
+fi
+fi
+if [[ "$CMD" == "list" ]]; then
+echo "All current entries:"
+for file in "$HOME/.MiniPass/.*.txt.gpg"; do
+name=$(basename "$file")
+name="${name#.}"
+name="${name%.txt.gpg}"
+[[ "$name" == "MiniPass" ]] && continue
+echo "$name"
+done
+fi
+exit 0
