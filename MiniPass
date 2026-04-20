@@ -38,7 +38,7 @@ echo
 read -sp "Enter master password: " PW
 echo
 if gpg --batch --quiet --no-tty --passphrase "$PW" --pinentry-mode loopback -d "$HOME/.MiniPass/.MiniPass.txt.gpg" > /dev/null 2>&1; then
-echo -e "$NU\nNP" | gpg --batch --quiet --no-tty --passphrase-fd 0 --pinentry-mode loopback -c - > "$HOME/.MiniPass/.$NN.txt.gpg"
+echo -e "$NU\n$NP" | gpg --batch --quiet --no-tty --passphrase-fd 0 --pinentry-mode loopback -c - > "$HOME/.MiniPass/.$NN.txt.gpg"
 rm "$HOME/.MiniPass/.$NN.txt"
 else
 echo "Password is incorrect"
