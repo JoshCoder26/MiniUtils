@@ -8,3 +8,19 @@ echo "Checking for updates..."
 mkdir -p /temp/MiniUpdater
 wget -q -O "/temp/MiniUpdater/repo.zip" "https://github.com/JoshCoder26/MiniUtils/archive/main.zip"
 unzip -q "/temp/MiniUpdater/repo.zip" -p "/temp/MiniUpdater"
+for file in "/temp/MiniUpdater/MiniUtils-main"/*; do
+FILE="$(basename "$file")"
+if [[ -d "$file" ]]; then
+continue
+fi
+if [[ "$FILE" == "MiniUpdater" ]]; then
+continue
+fi
+if ! diff "$file" "/MiniUtils/$FILE" > /dev/null 2>&1 ; then
+read -p "Do you want to install/update $FILE? (Y/N)" INPUT
+if [[ ${INPUT,,} == "y" ]]; then
+cp "$file" "/MiniUtils/$FILE"
+fi
+fi
+done
+echo "You are up-to-date! (Or decided to stick to the old(er) version(s)"
