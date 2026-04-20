@@ -13,17 +13,17 @@ function MainLoop() {
             read -p "Enter line number:" LINENUM
             echo "Enter line contents:"
             read LINETEXT
-            echo $(head -n "$LINENUM" "$file") "$LINETEXT" $(tail -n $(($(wc -l < "$file")-$(("$LINENUM"+1)))) "$file") > "$file"
+            sed -i "${LINENUM}i$LINETEXT" "$file"
         elif [ "$SELECTION" = "2" ] ; then
             echo "Enter line number:"
             read LINENUM
-            echo $(head -n $(("$LINENUM"-1)) "$file") $(tail -n $(($(wc -l < "$file")-"$LINENUM")) "$file") > "$file"
+            sed -i "${LINENUM}d" "$file"
         elif [ "$SELECTION" = "3" ] ; then
             echo "Enter line number:"
             read LINENUM
             echo "Enter line contents:"
             read LINETEXT
-            echo $(head -n $(("$LINENUM"-1)) "$file") "$LINETEXT" $(tail -n $(($(wc -l < "$file")-"$LINENUM")) "$file") > "$file"
+            sed -i "${LINENUM}s/.*/$LINETEXT/" "$file"
         elif [ "$SELECTION" = "4" ] ; then
             echo "Enter file name"
             read FILENAME
