@@ -29,4 +29,3 @@ fi
 echo "Successfully downloaded the MiniUtils library"
 echo "Succesfully set the correct permissions for running"
 echo "Done!"
-rm -f $(which $0)
