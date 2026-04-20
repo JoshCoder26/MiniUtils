@@ -7,7 +7,7 @@ fi
 echo "Checking for updates..."
 mkdir -p /tmp/MiniUpdater
 wget -q -O "/tmp/MiniUpdater/repo.zip" "https://github.com/JoshCoder26/MiniUtils/archive/main.zip"
-unzip -q "/tmp/MiniUpdater/repo.zip" -p "/tmp/MiniUpdater"
+unzip -q "/tmp/MiniUpdater/repo.zip" -d "/tmp/MiniUpdater"
 for file in "/tmp/MiniUpdater/MiniUtils-main"/*; do
 FILE="$(basename "$file")"
 if [[ -d "$file" ]]; then
