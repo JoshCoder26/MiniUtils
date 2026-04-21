@@ -23,5 +23,5 @@ cp "$file" "/usr/local/bin/$FILE"
 fi
 fi
 done
-echo "You are up-to-date! (Or decided to stick to the old(er) version(s)"
+echo "You are up-to-date! Or decided to stick to the old version(s)!"
 rm -rf /tmp/MiniUpdater
