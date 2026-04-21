@@ -26,6 +26,8 @@ if [[ "${INPUT,,}" == "y" ]]; then
 wget -q -O /usr/local/bin/MiniPass https://raw.githubusercontent.com/JoshCoder26/MiniUtils/main/MiniPass
 chmod 555 /usr/local/bin/MiniPass
 fi
+wget -q -O /usr/local/bin/MiniUpdater https://raw.githubusercontent.com/JoshCoder26/MiniUtils/main/MiniUpdater
+chmod 555 /usr/local/bin/MiniUpdater
 echo "Successfully downloaded the MiniUtils library"
 echo "Succesfully set the correct permissions for running"
 echo "Done!"
