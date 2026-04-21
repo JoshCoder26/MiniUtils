@@ -13,7 +13,7 @@ FILE="$(basename "$file")"
 if [[ -d "$file" ]]; then
 continue
 fi
-if [[ "$FILE" == "MiniInstaller.sh" ]]; then
+if [[ "$FILE" == "MiniInstaller.sh" || "$FILE" == "README.md"]]; then
 continue
 fi
 if ! diff "$file" "/usr/local/bin/$FILE" > /dev/null 2>&1 ; then
