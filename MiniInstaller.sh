@@ -39,23 +39,6 @@ chmod 555 "/usr/local/bin/$FILE"
 fi
 fi
 done
-# read -p "Do you want to install MiniEditor? (Y/N)" INPUT
-# if [[ "${INPUT,,}" == "y" ]]; then
-# wget -q -O /usr/local/bin/MiniEditor https://raw.githubusercontent.com/JoshCoder26/MiniUtils/main/MiniEditor
-# chmod 555 /usr/local/bin/MiniEditor
-# fi
-# read -p "Do you want to install MiniMath? (Y/N)" INPUT
-# if [[ "${INPUT,,}" == "y" ]]; then
-# wget -q -O /usr/local/bin/MiniMath https://raw.githubusercontent.com/JoshCoder26/MiniUtils/main/MiniMath
-# chmod 555 /usr/local/bin/MiniMath
-# fi
-#read -p "Do you want to install MiniPass? (Y/N)" INPUT
-# if [[ "${INPUT,,}" == "y" ]]; then
-# wget -q -O /usr/local/bin/MiniPass https://raw.githubusercontent.com/JoshCoder26/MiniUtils/main/MiniPass
-# chmod 555 /usr/local/bin/MiniPass
-# fi
-# wget -q -O /usr/local/bin/MiniUpdater https://raw.githubusercontent.com/JoshCoder26/MiniUtils/main/MiniUpdater
-# chmod 555 /usr/local/bin/MiniUpdater
 echo "Successfully downloaded the MiniUtils library"
 echo "Successfully set the correct permissions for running"
 echo "Done!"
