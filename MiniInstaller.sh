@@ -4,8 +4,6 @@ if [[ $EUID -ne 0 ]]; then
 echo "You will now be asked for your password, this is needed for installing MiniUtils"
 exec sudo bash "$0"
 fi
-apt update -qq
-apt install -y -qq wget unzip
 echo "Thank you for choosing for MiniUtils!"
 echo "I hope you will like my programs"
 cat <<EOF
