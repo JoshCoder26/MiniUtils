@@ -30,7 +30,7 @@ cp "$file" "/usr/local/bin/MiniUpdater"
 chmod 555 "/usr/local/bin/MiniUpdater"
 continue
 fi
-read -p "Do you want to install/update $FILE? (Y/N) " INPUT
+read -p "Do you want to install $FILE? (Y/N) " INPUT
 if [[ ${INPUT,,} == "y" ]]; then
 cp "$file" "/usr/local/bin/$FILE"
 chmod 555 "/usr/local/bin/$FILE"
