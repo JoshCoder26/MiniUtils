@@ -59,6 +59,9 @@ MainLoop "$FILE"
 exit 0
 fi
 else
-error 002 "No file specified"
+echo "Enter a flie:"
+read FILE
+MainLoop "$FILE"
+exit 0
 fi
 exit 1
