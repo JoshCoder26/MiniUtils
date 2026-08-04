@@ -6,8 +6,4 @@ I have made: a text editor, a calculator that supports floats and a password man
 
 ## How to install
 
-First, make sure you have wget and unzip installed, then you can install the directory by doing this:
-
-`wget -O /usr/local/bin/MiniInstaller https://raw.githubusercontent/JoshCoder26/MiniUtils/main/MiniInstaller.sh; chmod 555 /usr/local/bin/MiniInstaller; MiniInstaller`
-
-If you don't, then install wget and unzip! (Head over to the wiki for instructions)
+**Unavailable at the moment! I'm busy making major updates! Please check later!**
