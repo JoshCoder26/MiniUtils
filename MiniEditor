@@ -59,7 +59,7 @@ MainLoop "$FILE"
 exit 0
 fi
 else
-echo "Enter a flie:"
+echo "Enter a file:"
 read FILE
 MainLoop "$FILE"
 exit 0
