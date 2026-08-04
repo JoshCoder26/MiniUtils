@@ -14,7 +14,7 @@ EOF
 echo "looking for programs"
 trap 'rm -rf /tmp/MiniInstaller' EXIT
 mkdir -p /tmp/MiniInstaller
-wget -q -O "/tmp/MiniInstaller/repo.zip" "https://github.com/JoshCoder26/MiniUtils/archive/main.zip"
+wget -q -O "/tmp/MiniInstaller/repo.zip" "https://github.com/JoshCoder26/MiniUtils/archive/Legacy.zip"
 unzip -q "/tmp/MiniInstaller/repo.zip" -d "/tmp/MiniInstaller"
 for file in "/tmp/MiniInstaller/MiniUtils-main"/*; do
 FILE="$(basename "$file")"
