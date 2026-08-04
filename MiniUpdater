@@ -1,0 +1,32 @@
+#!/bin/bash
+if [[ $EUID -ne 0 ]]; then
+echo "You will now be asked for your password, this is needed for updating MiniUtils"
+sudo $0
+exit 0
+fi
+echo "Checking for updates..."
+mkdir -p /tmp/MiniUpdater
+wget -q -O "/tmp/MiniUpdater/repo.zip" "https://github.com/JoshCoder26/MiniUtils/archive/Legacy.zip"
+unzip -q "/tmp/MiniUpdater/repo.zip" -d "/tmp/MiniUpdater"
+for file in "/tmp/MiniUpdater/MiniUtils-main"/*; do
+FILE="$(basename "$file")"
+if [[ -d "$file" ]]; then
+continue
+fi
+if [[ "$FILE" == "MiniInstaller.sh" || "$FILE" == "README.md" ]]; then
+continue
+fi
+if ! diff "$file" "/usr/local/bin/$FILE" > /dev/null 2>&1 ; then
+if [[ "$FILE" == "MiniUpdater" ]]; then
+cp "$file" "/usr/local/bin/$FILE"
+continue
+fi
+read -p "Do you want to install/update $FILE? (Y/N)" INPUT
+if [[ ${INPUT,,} == "y" ]]; then
+cp "$file" "/usr/local/bin/$FILE"
+fi
+fi
+done
+echo "You are up-to-date! Or decided to stick to the old version(s)!"
+echo "You are using MiniUtils Legacy, if you want to update to the most recent version, visit https://github.com/JoshCoder26/MiniUtils"
+rm -rf /tmp/MiniUpdater
