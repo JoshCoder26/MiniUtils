@@ -17,7 +17,7 @@ if [[ "$FILE" == "MiniInstaller.sh" || "$FILE" == "README.md" ]]; then
 continue
 fi
 if ! diff "$file" "/usr/local/bin/$FILE" > /dev/null 2>&1 ; then
-if [[ "$FILE" == "MiniUpdater" ]]; then
+if [[ "$FILE" == "MiniUpdater.sh" ]]; then
 cp "$file" "/usr/local/bin/$FILE"
 continue
 fi
