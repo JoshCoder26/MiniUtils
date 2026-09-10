@@ -27,6 +27,12 @@ cp "$file" "/usr/local/bin/$FILE"
 fi
 fi
 done
-echo "You are up-to-date! Or decided to stick to the old version(s)!"
+for file in "/tmp/MiniUpdater/MiniUtils-main"/*; do
+FILE="$(basename "$file")"
+if [[ "$FILE" == "README.md" || "$FILE == MiniUpdater"]] ; then
+continue
+rm -f $FILE
+done
+echo "Please start this program again!"
 echo "You are using MiniUtils Legacy, if you want to update to the most recent version, visit https://github.com/JoshCoder26/MiniUtils"
 rm -rf /tmp/MiniUpdater
