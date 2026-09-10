@@ -27,5 +27,6 @@ cp "$file" "/usr/local/bin/$FILE"
 fi
 fi
 done
-echo "You are up-to-date! Or decided to stick to the old version(s)!"
+echo "You are now ready for all future updates to MiniUtils Legacy"
+echo "You are using MiniUtils Legacy, when MiniUtils V2 comes out, you can install it using 'MiniUpdater Upgrade'!"
 rm -rf /tmp/MiniUpdater
