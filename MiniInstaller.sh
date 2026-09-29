@@ -16,7 +16,7 @@ trap 'rm -rf /tmp/MiniInstaller' EXIT
 mkdir -p /tmp/MiniInstaller
 wget -q -O "/tmp/MiniInstaller/repo.zip" "https://github.com/JoshCoder26/MiniUtils/archive/Legacy.zip"
 unzip -q "/tmp/MiniInstaller/repo.zip" -d "/tmp/MiniInstaller"
-for file in "/tmp/MiniInstaller/MiniUtils-main"/*; do
+for file in "/tmp/MiniInstaller/MiniUtils-main"; do
 FILE="$(basename "$file")"
 if [[ -d "$file" ]]; then
 continue
