@@ -7,7 +7,7 @@ sleep 5
 less "$file"
 echo "Choose one of the following actions and type the corresponding number"
 echo "1: Add line 2: Remove line 3: Edit line 4. Rename 5. Exit"
-read -p "1: Add line 2: Remove line 3: Edit line 4. Rename 5. Exit" SELECTION
+read SELECTION
 if [ "$SELECTION" = "1" ] ; then
 echo "Enter line number:"
 read -p "Enter line number:" LINENUM
@@ -60,7 +60,10 @@ exit 0
 fi
 else
 echo "Enter a file:"
-read FILE
+if [ ! -f "$FILE" ]; then
+echo "Creating file"
+touch "$FILE"
+fi
 MainLoop "$FILE"
 exit 0
 fi
